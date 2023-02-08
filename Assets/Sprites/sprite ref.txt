@@ -1,0 +1,4 @@
+Earth 
+Author	Deep-Fold
+Made with	Godot
+https://deep-fold.itch.io/pixel-planet-generator
