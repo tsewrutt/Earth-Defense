@@ -2,11 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneChangeButton : MonoBehaviour
 {
-    public void ChangeScene(string sceneName)
+    public Button levelchoice_b;
+    public Animator transition;
+
+    void Start()
     {
-        SceneManager.LoadScene(sceneName);
+        levelchoice_b.onClick.AddListener(TaskOnClick);
     }
+
+    void TaskOnClick()
+    {
+        // StartCouroutine(startransition);
+        SceneManager.LoadScene("level1");
+    }
+    /*IEnumerator startransition()
+    {
+        transition.SetTrigger("exit");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("level1");
+
+    }*/
 }
