@@ -21,10 +21,10 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         //this is for testing purpose
-        if (Input.GetKeyDown(KeyCode.Space))
+       /* if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(10);
-        }
+        }*/
         //
         if (currenth <= 0 || enemyMovement.waypointIndex > enemyMovement.waypoints.Count - 1)
         {
