@@ -13,7 +13,7 @@ public class TurretProjectile : MonoBehaviour
     public int Damage { get; set; }
     
     public float DelayPerShot { get; set; }
-    protected float _nextAttaktime;
+    protected float _nextAttacktime;
     protected Turret _turret;
     protected Bullet b;
     void Start()
@@ -25,46 +25,23 @@ public class TurretProjectile : MonoBehaviour
        // LoadProjectile();
     }
 
-    // Update is called once per frame
-  protected virtual void Update()
+    protected virtual void Update()
     {
-/*        if (IsTurretEmpty())
+        if (Time.time > _nextAttacktime)
         {
-            LoadProjectile();
-        }*/
-        if(Time.time > _nextAttaktime)
-        {
-            _nextAttaktime = Time.time + 1.0f / delaybtwAttacks;
-            GameObject bullet = Instantiate(bprefab, transform.position, transform.rotation);
-            //Vector2 direction = (transform.position - transform.position).normalized;
-            //bullet.GetComponent<Rigidbody2D>().velocity = direction * b_speed;
-            
-            bullet.transform.parent = null;
-            //bullet.SetEnemy(_turret.target);
-            bullet.transform.localPosition = projectileSpawnPos.position;
-            //newI.transform.SetParent(projectileSpawnPos);
-            Destroy(bullet, 5.0f);
-            if (_turret.target != null && b != null)
+            if (_turret.target != null)
             {
-                b.transform.parent = null;
-                b.SetEnemy(_turret.target);
+                _nextAttacktime = Time.time + DelayPerShot;
+                Vector2 direction = (_turret.target.transform.position - transform.position).normalized;
+                GameObject bullet = Instantiate(bprefab, projectileSpawnPos.position, Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = direction * 2;
+                Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                bulletComponent.Damage = Damage;
+                bulletComponent.SetEnemy(_turret.target);
+                Destroy(bullet, 3.0f);
             }
-            _nextAttaktime = Time.time + DelayPerShot;
         }
     }
-
-  /*  protected virtual void LoadProjectile()
-    {
-        //GameObject newI = _pooler.GetInstanceFromPool();
-        newI.transform.localPosition = projectileSpawnPos.position;
-        newI.transform.SetParent(projectileSpawnPos);
-
-        b = newI.GetComponent<Bullet>();
-        b.TurretOwner = this;
-       // b.ResetProjectile();
-        b.Damage = Damage;
-        newI.SetActive(true);
-    }*/
 
 
 }

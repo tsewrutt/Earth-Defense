@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour
 {
     private List<Enemy> e_list = new List<Enemy>();
     public Enemy target;
+    public int cost;
 
     private void Update()
     {
@@ -25,11 +26,22 @@ public class Turret : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
+        /* if (target != null)
+         {
+             Vector3 targetPos = target.transform.position - transform.position;
+             float angle = Vector3.SignedAngle(transform.up, targetPos, transform.forward);
+             transform.Rotate(0f, 0f, angle);
+         }
+         else
+         {
+             return;
+         }*/
+
         if (target != null)
         {
             Vector3 targetPos = target.transform.position - transform.position;
-            float angle = Vector3.SignedAngle(transform.up, targetPos, transform.forward);
-            transform.Rotate(0f, 0f, angle);
+            Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, targetPos);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, Time.deltaTime * 180f);
         }
         else
         {

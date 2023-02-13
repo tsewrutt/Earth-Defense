@@ -7,11 +7,12 @@ TagManager:
   - enemy_type_1
   - enemy
   - bullet1
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Minimap
   - Water
   - UI
   - 
