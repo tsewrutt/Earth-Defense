@@ -24,7 +24,7 @@ public class TurretPlacement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && selectedPrefab != null)
         {
             Turret t = selectedPrefab.GetComponent<Turret>();
-            if(mm.money - t.cost > 0) //checks if player has enough money for turret
+            if(mm.money - t.cost >= 0) //checks if player has enough money for turret
             {
                 // Get the position of the mouse click in world space
                 Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

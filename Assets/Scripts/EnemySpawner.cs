@@ -17,16 +17,17 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemies = 0;
     private GameObject[] enemies;
 
-    
+    public MoneyManager mm;
     public Text timer_txt;
     public Text press_s;
     public Text waveTxt;
+
     private string updateTxt;
     private bool start = false;
-
+    private bool moneyRewarded = false;
     void Start()
     {
-        press_s.text = "Press any key to start";
+        press_s.text = "Press 's' to start";
         UpdateText();
     }
 
@@ -50,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 yield return null;
             }
-
+            
             float startTimer = timeBetweenWaves;
             while (startTimer > 0)
             {
@@ -59,9 +60,10 @@ public class EnemySpawner : MonoBehaviour
 
                 yield return null;
             }
-
+            timer_txt.text = "";
             yield return new WaitForSeconds(timeBetweenWaves);
             waveNumber++;
+            moneyRewarded = false;
             UpdateText();
         }
     }
@@ -73,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKey && !start)
+        if (Input.GetKeyDown(KeyCode.S) && !start)
         {
             start = true;
             Destroy(press_s);
@@ -92,8 +94,30 @@ public class EnemySpawner : MonoBehaviour
             //endscene
             
         }
+
+        //money rewarded
+        switch (waveNumber)
+        {
+            case 1:
+                if (!moneyRewarded)
+                {
+                    mm.money += 500;
+                    moneyRewarded = true;
+                }
+                break;
+            case 2:
+                if (!moneyRewarded)
+                {
+                    mm.money += 1500;
+                    moneyRewarded = true;
+                }
+                break;
+            // add more cases for additional waves if needed
+            default:  
+                break;
+        }
         //Debug.Log("waveNum: " + waveNumber + "waveSizeLength: " + waveSizes.Length);
-        //this works but we'll get rid of the delay later
+        //this works but we'll get rid of the delay
         if (waveNumber == waveSizes.Length)
         {
             SceneManager.LoadScene("endscene");

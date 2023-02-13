@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpawnPos: {fileID: 8163409621627188458}
   delaybtwAttacks: 0.5
-  damage: 5
+  damage: 10
   bprefab: {fileID: 7729128779541893528, guid: 1d9c0a429bab7e647a9e0ddc8e4d9fef, type: 3}
 --- !u!1 &8163409621627188459
 GameObject:
