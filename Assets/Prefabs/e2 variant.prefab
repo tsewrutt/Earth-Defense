@@ -216,8 +216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.86}
-  m_SizeDelta: {x: 167.8047, y: 32.0718}
+  m_AnchoredPosition: {x: 0, y: 1.08}
+  m_SizeDelta: {x: 168.34, y: 32.0718}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1125954585
 Canvas:
@@ -301,23 +301,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_Name
-      value: e1 Variant
+      value: e2 variant
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_TagString
       value: enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739307, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739307, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739307, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1668201289, guid: d8f07152ffee9394baad8be4ec0924ea, type: 3}
+    - target: {fileID: 2971005089939739307, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.31990921
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739307, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.43857968
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739307, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8584906
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.70763
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.69566
+      objectReference: {fileID: 0}
+    - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5
+      value: -6.5093
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.42
+      value: -1.4237
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -401,7 +433,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.43, y: 1.72}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
