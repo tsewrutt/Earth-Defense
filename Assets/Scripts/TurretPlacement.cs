@@ -70,11 +70,11 @@ public class TurretPlacement : MonoBehaviour
                     //do like prompt saying not sufficiant funds
                     Debug.Log("Not Enough Coins");
                 }
-
+                selectedPrefab = null;
                 //sets to null for next button click
             }
 
-            selectedPrefab = null;
+            
         
         }
     }

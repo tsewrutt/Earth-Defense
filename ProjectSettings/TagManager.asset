@@ -8,6 +8,7 @@ TagManager:
   - enemy
   - bullet1
   - Ground
+  - collider
   layers:
   - Default
   - TransparentFX
