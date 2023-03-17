@@ -17,7 +17,7 @@ public class SceneChangeButton : MonoBehaviour
     void TaskOnClick()
     {
         // StartCouroutine(startransition);
-        SceneManager.LoadScene("level1");
+        SceneManager.LoadScene("tutorialScene");
     }
     /*IEnumerator startransition()
     {

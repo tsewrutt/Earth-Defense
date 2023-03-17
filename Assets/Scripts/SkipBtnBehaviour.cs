@@ -2,49 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class SkipBtnBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
     public Button skipBtn;
 
-    //dialog box
-    public Transform targetTransform;
-    public GameObject dialogBox;
-    private Transform dialogBoxTrans;
-    public float delayTime = 2.0f;
-    public float speed = 0.1f;
+    public DialogManager dmscript;
+    public CoroutineMove cmovement;
+    public int btnpresscount;
 
-    
-    private bool boxMotionDone;
     void Start()
     {
-        dialogBoxTrans = dialogBox.transform;
-        StartCoroutine(OperationMoveBox());
+        skipBtn.onClick.AddListener(TaskOnClick);
+  
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-
-    private IEnumerator OperationMoveBox()
-    {
-        yield return new WaitForSeconds(delayTime);
-        while(dialogBoxTrans.position  != targetTransform.position)
+        if (btnpresscount == 7)
         {
-            TransformBoxTowardsTarget(dialogBoxTrans.position);
-            yield return null;
+            //that will be at the last press
+            SceneManager.LoadScene("level1");
         }
-       
-
     }
 
 
-    private void TransformBoxTowardsTarget(Vector3 boxPos)
+    //gets called whenver skip button is pressed
+    public void TaskOnClick()
     {
-        float step = speed * Time.deltaTime;
-        boxPos = Vector3.MoveTowards(targetTransform.position ,boxPos , step);
+        SceneManager.LoadScene("level1");
+
     }
+
+
+/*    public IEnumerator showTextNow(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+    }*/
+
+
+    public IEnumerator moveToScene(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        SceneManager.LoadScene("level1");
+    }
+    
 }

@@ -9,6 +9,7 @@ TagManager:
   - bullet1
   - Ground
   - collider
+  - signal
   layers:
   - Default
   - TransparentFX

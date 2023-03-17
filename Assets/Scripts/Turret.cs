@@ -26,16 +26,6 @@ public class Turret : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        /* if (target != null)
-         {
-             Vector3 targetPos = target.transform.position - transform.position;
-             float angle = Vector3.SignedAngle(transform.up, targetPos, transform.forward);
-             transform.Rotate(0f, 0f, angle);
-         }
-         else
-         {
-             return;
-         }*/
 
         if (target != null)
         {

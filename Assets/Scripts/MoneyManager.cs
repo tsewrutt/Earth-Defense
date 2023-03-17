@@ -36,6 +36,9 @@ public class MoneyManager : MonoBehaviour
 
     void UpdateMoneyText()
     {
-        moneyTxt.text = "$ " + money;
+        moneyTxt.text = ""+ money;
     }
+
+
+
 }

@@ -8,7 +8,7 @@ public class CoroutineMove : MonoBehaviour
     public GameObject destinationObject;
     public GameObject targetObject;
     public float speed = 0.1f;
-    public float delayTime = 2.0f; // Time delay before movement starts
+    public float delayTime = 0.5f; // Time delay before movement starts
 
     private Transform destinationTransform;
     private Transform targetTransform;
@@ -19,7 +19,7 @@ public class CoroutineMove : MonoBehaviour
         destinationTransform = destinationObject.transform;
         targetTransform = targetObject.transform;
         targetTransformForBack = targetObject.transform;
-        StartCoroutine(MoveCoroutine());
+       // StartCoroutine(MoveCoroutine());
     }
     private void MoveTowardsTarget(Vector3 targetPosition)
     {
@@ -28,13 +28,13 @@ public class CoroutineMove : MonoBehaviour
     }
 
 
-    private void MoveBackDown()
+/*    public void MoveBackDown(Vector2 3 targetPosition)
     {
         float step = speed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, targetTransformForBack.position, step);
-    }
+    }*/
 
-    private IEnumerator MoveCoroutine()
+    public IEnumerator MoveCoroutine()
     {
         yield return new WaitForSeconds(delayTime);
 
@@ -49,6 +49,23 @@ public class CoroutineMove : MonoBehaviour
         while (transform.position != targetTransform.position)
         {
             MoveTowardsTarget(targetTransform.position);
+            yield return null;
+        }
+    }
+
+    public IEnumerator MoveBackCoroutine()
+    {
+
+        while (transform.position != targetTransformForBack.position)
+        {
+            MoveTowardsTarget(targetTransformForBack.position);
+            yield return null;
+        }
+
+        // Move to target object
+        while (transform.position != targetTransformForBack.position)
+        {
+            MoveTowardsTarget(targetTransformForBack.position);
             yield return null;
         }
     }

@@ -19,10 +19,10 @@ public class TurretProjectile : MonoBehaviour
     void Start()
     {
         _turret = GetComponent<Turret>();
-        //we dont need pooler
+       
         Damage = damage;
         DelayPerShot = delaybtwAttacks;
-       // LoadProjectile();
+       
     }
 
     protected virtual void Update()

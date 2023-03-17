@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogManager : MonoBehaviour
 {
@@ -16,6 +17,16 @@ public class DialogManager : MonoBehaviour
     public float shakeDuration = 1f;
     public float elapsed = 0.0f;
 
+    //TRANSFORM INFO
+    public Vector3 targetPosForAngel;
+    public Vector3 targetPosForJesus;
+    public float moveSpeed = 10f;
+    private Vector3 initJesusPos;
+    private Vector3 initAngelPos;
+
+    //DIALOG
+    private int index = 0;
+    List<string> dialog_l = new List<string>();
 
     //JESUS DIALOG
     string s1 = "The World Is on FIRE!!! The human activities are killing Planet Earth.";
@@ -30,18 +41,22 @@ public class DialogManager : MonoBehaviour
     //TEXT BOXES
     public Text characterName;
     public Text characterDialog;
+    public SkipBtnBehaviour skipbtnbehaviour;
+    public CoroutineMove cmovement;
 
 
-    List<string> dialog_l = new List<string>();
     void Start()
     {
+        initAngelPos = angel.transform.position;
+        initJesusPos = jesus.transform.position;
+        
         dialog_l.Add(s1);
         dialog_l.Add(s11);
         dialog_l.Add(s2);
         dialog_l.Add(s21);
         dialog_l.Add(s3);
         dialog_l.Add(s31);
-
+        StartCoroutine(Convo(index));
     }
 
     // Update is called once per frame
@@ -52,7 +67,9 @@ public class DialogManager : MonoBehaviour
             StartCoroutine(ShakeSprite(jesus));
             StartCoroutine(ShakeSprite(angel));
         }
+        //StartCoroutine(normalWait(4));
 
+       // UpdateDialogBox("Angel", dialog_l[5]);
 
     }
 
@@ -76,4 +93,97 @@ public class DialogManager : MonoBehaviour
         obj.transform.position = initialPosition;
         
     }
+
+
+    private IEnumerator Convo(int i)
+    {
+
+        //cmovement.moveCoroutine(true);
+        StartCoroutine(MoveGameObject(jesus, targetPosForJesus));
+        StartCoroutine(MoveGameObject(angel, targetPosForAngel));
+        yield return StartCoroutine(cmovement.MoveCoroutine());
+        Debug.Log("movement complete");
+        while (i < dialog_l.Count)
+        {
+            if (i % 2 == 0)
+            {
+                // yield return new WaitForSeconds(1f);
+                
+                StartCoroutine(ShakeSprite(jesus));
+                yield return StartCoroutine(ShowTextAndWait(i, dialog_l[i], 5.0f));
+            }
+            else
+            {
+              //  yield return new WaitForSeconds(1f);
+                StartCoroutine(ShakeSprite(angel));
+                yield return StartCoroutine(ShowTextAndWait(i, dialog_l[i], 5.0f));
+            }
+
+           
+            Debug.Log("changing convo...");
+            i++;
+
+            if (i >= dialog_l.Count)
+            {
+                UpdateDialogBox("", "");
+                StartCoroutine(cmovement.MoveBackCoroutine());
+                yield return StartCoroutine(MoveGameObject(jesus, initJesusPos));
+                yield return StartCoroutine(MoveGameObject(angel, initAngelPos));
+               
+                StartCoroutine(UpdateScene());
+                //insert here
+               
+            }
+        }
+
+
+
+    }
+    private void UpdateDialogBox(string character, string dialog)
+    {
+        characterName.text = character;
+        characterDialog.text = dialog;
+    }
+
+    private IEnumerator ShowTextAndWait(int i,string dialog, float delayTime)
+    {
+        string characterName;
+        UpdateDialogBox("", "");
+        //yield return new WaitForSeconds(2.0f);
+        if(i % 2 == 0)
+        {
+            characterName = "Jesus";
+        }
+        else
+        {
+            characterName = "Angel";
+        }
+        UpdateDialogBox(characterName, dialog);
+        yield return new WaitForSeconds(delayTime);
+        UpdateDialogBox("", "");
+    }
+
+
+    private IEnumerator MoveGameObject(GameObject go, Vector3 targetPos)
+    {
+        while(go.transform.position != targetPos)
+        {
+
+            go.transform.position = Vector3.MoveTowards(go.transform.position, targetPos, moveSpeed);
+            yield return null;
+        
+        }
+
+    }
+
+    private IEnumerator UpdateScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene("level1");
+    }
+
+
+
+
+
 }

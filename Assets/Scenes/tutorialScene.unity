@@ -559,9 +559,9 @@ GameObject:
   - component: {fileID: 123969355}
   - component: {fileID: 123969354}
   - component: {fileID: 123969353}
-  - component: {fileID: 123969352}
+  - component: {fileID: 123969356}
   m_Layer: 5
-  m_Name: exitgamebtn
+  m_Name: backgamebtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -588,19 +588,6 @@ RectTransform:
   m_AnchoredPosition: {x: -834.4, y: -472}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &123969352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 123969350}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9e132946ad7b6459940b2f11bf096f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _b: {fileID: 123969353}
 --- !u!114 &123969353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +670,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123969350}
   m_CullTransparentMesh: 1
+--- !u!114 &123969356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123969350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4dc9af5e73d2c64499ce44a21608c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _b: {fileID: 123969353}
 --- !u!1 &265447007
 GameObject:
   m_ObjectHideFlags: 0
@@ -857,8 +857,13 @@ MonoBehaviour:
   shakeMagnitude: 0.1
   shakeDuration: 0.5
   elapsed: 0
+  targetPosForAngel: {x: -5.5, y: -0.15, z: -0.14}
+  targetPosForJesus: {x: 5.5, y: -0.19, z: 0}
+  moveSpeed: 0.1
   characterName: {fileID: 2097546972}
   characterDialog: {fileID: 1078083403}
+  skipbtnbehaviour: {fileID: 1642554207}
+  cmovement: {fileID: 265447011}
 --- !u!1 &360113320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,7 +1146,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit
+  m_Text: Back
 --- !u!222 &555114885
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1227,7 +1232,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681151795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.16, y: -0.19, z: 0}
+  m_LocalPosition: {x: 10.25, y: -0.19, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1536,9 +1541,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963601962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.78, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -10.44, y: -0.15, z: -0.14}
+  m_LocalScale: {x: 0.88, y: 0.88, z: 0.88}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -1694,7 +1699,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The World Is on FIRE!!! WE NEED HELP 0N EARTH
+  m_Text: 
 --- !u!222 &1078083404
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3159,6 +3164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1642554205}
   - component: {fileID: 1642554206}
+  - component: {fileID: 1642554207}
   m_Layer: 0
   m_Name: scenelogic
   m_TagString: Untagged
@@ -3233,6 +3239,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1642554207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642554203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc21c72e32e383e4192e09c6e00e50ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skipBtn: {fileID: 906792356}
+  dmscript: {fileID: 265447012}
+  cmovement: {fileID: 265447011}
+  btnpresscount: 0
 --- !u!1 &1740636554
 GameObject:
   m_ObjectHideFlags: 0
@@ -6028,7 +6050,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Jesus
+  m_Text: 
 --- !u!222 &2097546973
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -7,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
+    //TUTORIAL STUFF
+    public TutorialScript ts;
+    public Text allUpdateTxt;
+    public Text ghostTxt;
     public GameObject[] enemyPrefabs;
 
     public int[] waveSizes;
@@ -17,18 +21,31 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemies = 0;
     private GameObject[] enemies;
 
+    //MONEY MANAGEMENT
     public MoneyManager mm;
     public Text timer_txt;
-    public Text press_s;
     public Text waveTxt;
+   
 
     private string updateTxt;
     private bool start = false;
     private bool moneyRewarded = false;
+
+
+    //COIN
+    public float shakeMagnitude = 1f;
+    public float shakeDuration = 1f;
+    public float elapsed = 0.0f;
+    public GameObject coin;
+
+    //Wining Object
+    public Gamesignal signal;
+
     void Start()
     {
-        press_s.text = "Press 's' to start";
-        UpdateText();
+       
+       // press_s.text = "Press 's' to start";
+       // 
     }
 
     IEnumerator Spawn()
@@ -75,14 +92,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S) && !start)
+        if (ts.tutorialComplete == true)
         {
+          //we can get a boolean from the tutorialscript, then check if the bool is true, meaning it is done,
+          //when tutorial done, then go in here then change start = true; // or press skip to change the bool right away
+            //HERE WE WILL START THE ACTUAL GAME ONCE THE TUTORIAL PART IS DONE!!!
+            
             start = true;
-            Destroy(press_s);
+            UpdateText(); // this writes the wave number now
+           
             StartCoroutine(Spawn());
         }
+        ts.tutorialComplete = false;
         //check for amount of enemies left
-        if(start == true)
+        if (start == true)
         {
             enemies = GameObject.FindGameObjectsWithTag("enemy");
 
@@ -102,6 +125,7 @@ public class EnemySpawner : MonoBehaviour
                 if (!moneyRewarded)
                 {
                     mm.money += 500;
+                    StartCoroutine(Shake(coin));
                     moneyRewarded = true;
                 }
                 break;
@@ -109,6 +133,7 @@ public class EnemySpawner : MonoBehaviour
                 if (!moneyRewarded)
                 {
                     mm.money += 1500;
+                    StartCoroutine(Shake(coin));
                     moneyRewarded = true;
                 }
                 break;
@@ -116,10 +141,12 @@ public class EnemySpawner : MonoBehaviour
             default:  
                 break;
         }
-        //Debug.Log("waveNum: " + waveNumber + "waveSizeLength: " + waveSizes.Length);
+        
         //this works but we'll get rid of the delay
         if (waveNumber == waveSizes.Length)
         {
+            // win = true; //we will use this to alter the content of endscene
+            signal.win = true;
             SceneManager.LoadScene("endscene");
         }
 
@@ -130,4 +157,25 @@ public class EnemySpawner : MonoBehaviour
         updateTxt = "Wave: " + (waveNumber + 1);
         waveTxt.text = updateTxt;
     }
+
+    private IEnumerator Shake(GameObject obj)
+    {
+        Vector3 initialPosition = obj.transform.position;
+        elapsed = 0.0f;
+        while (elapsed < shakeDuration)
+        {
+            //float x = initialPosition.x + Random.Range(-shakeMagnitude, shakeMagnitude);
+            float y = initialPosition.y + UnityEngine.Random.Range(-shakeMagnitude, shakeMagnitude);
+            obj.transform.position = new Vector3(initialPosition.x, y, initialPosition.z);
+
+            elapsed += Time.deltaTime;
+
+            // Pause for one frame before continuing the loop
+            yield return null;
+        }
+
+        obj.transform.position = initialPosition;
+
+    }
+
 }
