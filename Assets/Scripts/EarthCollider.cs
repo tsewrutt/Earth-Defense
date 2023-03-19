@@ -14,6 +14,10 @@ public class EarthCollider : MonoBehaviour
    // public Text moneyTxt;
     private string updateTxt;
     // Start is called before the first frame update
+
+    //GRAB STUFF FROM ES AND MANIPULATE IT
+    public EnemySpawner em;
+    public GameObject heart;
     void Start()
     {
         UpdateText();
@@ -25,6 +29,8 @@ public class EarthCollider : MonoBehaviour
         if (collision.CompareTag("enemy"))
         {
             health = health - enemydamage;
+            StartCoroutine(em.Shake(heart));
+
             UpdateText();
             if(health == 0)
             {
@@ -35,7 +41,7 @@ public class EarthCollider : MonoBehaviour
 
     private void UpdateText()
     {
-        updateTxt = "HP: " + health;
+        updateTxt = "" + health;
         //moneyTxt.text = "$ " + money;
         txt.text = updateTxt;
     }

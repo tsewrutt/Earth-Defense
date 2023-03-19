@@ -299,9 +299,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1024549476297492835, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: maxhealth
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_Name
-      value: e1 Variant 1
+      value: Fire Hazard
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_TagString
@@ -321,15 +325,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.79
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.79
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.9857144
+      value: 3.3571427
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -377,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739309, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: speed
-      value: 2
+      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -434,7 +438,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.24815714, y: 0.4398037}
   m_EdgeRadius: 0
---- !u!95 &4368082816191034962
+--- !u!95 &5206728308172928027
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -442,9 +446,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3223528155772508787}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e80e2009a8bb6ce448dbfb9c96cb37ed, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4809d57d21a9c0c4a8f99d71e59064cb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

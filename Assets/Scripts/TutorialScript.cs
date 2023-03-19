@@ -41,6 +41,7 @@ public class TutorialScript : MonoBehaviour
     private int enemyCount = 1;
     public MoneyManager mm;
     public EnemySpawner em;
+    public EarthCollider ec;
 
     //COROUTINE
     private Coroutine co;
@@ -85,7 +86,8 @@ public class TutorialScript : MonoBehaviour
         tutorialComplete = true;
 
         //disable button
-        Destroy(skipb);
+        ec.health = 100;
+        Destroy(skipb.gameObject);
     }
 
 
@@ -136,8 +138,9 @@ public class TutorialScript : MonoBehaviour
         em.timer_txt.text = "Starting next wave in: " + 1 + " seconds";
         yield return new WaitForSeconds(1);
         em.timer_txt.text = "";
+       
         tutorialComplete = true;
-
+        ec.health = 100;
     }
 
 
@@ -224,6 +227,8 @@ public class TutorialScript : MonoBehaviour
 
     private IEnumerator EnemyIncoming()
     {
+        em.waveTxt.text = "Practice Wave";
+        Destroy(skipb.gameObject); // now player cant skip to avoid the problem of having an extra enemy on the field
         em.timer_txt.text = "Starting next wave in: " + 5 + " seconds";
         yield return new WaitForSeconds(1);
         em.timer_txt.text = "Starting next wave in: " + 4 + " seconds";
@@ -247,10 +252,13 @@ public class TutorialScript : MonoBehaviour
                 //enemy died
                 enemyCount = 0;
                 em.allUpdateTxt.text = "Congrats! Tutorial Complete.";
+                yield return new WaitForSeconds(1.5f);
+                
             }
             yield return null;
         }
 
+       
         
     }
     

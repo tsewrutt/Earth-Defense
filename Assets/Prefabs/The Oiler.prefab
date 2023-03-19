@@ -299,9 +299,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1024549476297492835, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: maxhealth
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_Name
-      value: e1 Variant 1
+      value: The Oiler
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_TagString
@@ -385,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739309, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: speed
-      value: 2
+      value: 2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 360964516cd882e4d860b1b559451e7d, type: 3}

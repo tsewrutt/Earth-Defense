@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemies = 0;
     private GameObject[] enemies;
 
+    //BUTTON INTERACTIBILITY
+    public Button b1;
+    public Button b2;
+    public Button b3;
+
     //MONEY MANAGEMENT
     public MoneyManager mm;
     public Text timer_txt;
@@ -31,6 +37,7 @@ public class EnemySpawner : MonoBehaviour
     private bool start = false;
     private bool moneyRewarded = false;
 
+    //HEALTH
 
     //COIN
     public float shakeMagnitude = 1f;
@@ -43,20 +50,23 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-       
+        b2.interactable = false;
+        b3.interactable = false;
        // press_s.text = "Press 's' to start";
        // 
     }
 
     IEnumerator Spawn()
     {
+        int x;
         yield return new WaitForSeconds(timebefore1stwave);
 
         while (waveNumber < enemyPrefabs.Length)
         {
             for (int i = 0; i < waveSizes[waveNumber]; i++)
             {
-                GameObject enemy = Instantiate(enemyPrefabs[waveNumber], transform.position, transform.rotation);
+                x = Random.Range(0, enemyPrefabs.Length); // we know we have 5 different types of enemy
+                GameObject enemy = Instantiate(enemyPrefabs[x], transform.position, transform.rotation);
                 currentEnemies++;
                 yield return new WaitForSeconds(spawnDelay);
             }
@@ -72,12 +82,31 @@ public class EnemySpawner : MonoBehaviour
             float startTimer = timeBetweenWaves;
             while (startTimer > 0)
             {
+                //check if wavenumber 1 2 3
+                //then update text
+                switch (waveNumber)
+                {
+                    case 0:
+                       // StartCoroutine(Shake(coin));
+                        allUpdateTxt.text = "New Turret Unlocked!";
+                        break;
+                    case 1:
+                        //StartCoroutine(Shake(coin));
+                        allUpdateTxt.text = "New Turret Unlocked!";
+                        break;
+                    case 2:
+                        
+                        allUpdateTxt.text = "Warning: Excessive pollution detected! No more coins will be rewarded from this point onward.";
+                        break;
+                }
                 timer_txt.text = "Starting next wave in: " + startTimer.ToString("F1") + " seconds";
                 startTimer -= Time.deltaTime;
 
                 yield return null;
+                
             }
             timer_txt.text = "";
+
             yield return new WaitForSeconds(timeBetweenWaves);
             waveNumber++;
             moneyRewarded = false;
@@ -92,6 +121,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        //COULD BE AN ISSUE OF CLASHING WHERE AFTER ENEMY SPAWN PLAYER PRESSES SKIP
+        //OR WE COULD REMOVE SKIP BUTTON THE MOMENT WE PLACED TURRET
         if (ts.tutorialComplete == true)
         {
           //we can get a boolean from the tutorialscript, then check if the bool is true, meaning it is done,
@@ -125,7 +156,10 @@ public class EnemySpawner : MonoBehaviour
                 if (!moneyRewarded)
                 {
                     mm.money += 500;
+
                     StartCoroutine(Shake(coin));
+                    b2.interactable = true;
+                    StartCoroutine(WaitForCashIn());
                     moneyRewarded = true;
                 }
                 break;
@@ -134,6 +168,19 @@ public class EnemySpawner : MonoBehaviour
                 {
                     mm.money += 1500;
                     StartCoroutine(Shake(coin));
+                    StartCoroutine(Shake(coin));
+                    b3.interactable = true;
+                    StartCoroutine(WaitForCashIn());
+                    moneyRewarded = true;
+                }
+                break;
+
+            case 3:
+                if (!moneyRewarded)
+                {
+                    mm.money += 1000;
+                    StartCoroutine(Shake(coin));
+                    StartCoroutine(WaitForCashIn());
                     moneyRewarded = true;
                 }
                 break;
@@ -141,11 +188,18 @@ public class EnemySpawner : MonoBehaviour
             default:  
                 break;
         }
+
+
         
         //this works but we'll get rid of the delay
         if (waveNumber == waveSizes.Length)
         {
             // win = true; //we will use this to alter the content of endscene
+            //RUN FINAL BOSS 
+            //wave text to Final Boss wave
+            //Have a switch for if waveNumber is numb 5, then we go on a FinalBoss Coroutine!!! (just increase hp of fire hazard)
+
+            //THIS IS FOR WINNING!!!
             signal.win = true;
             SceneManager.LoadScene("endscene");
         }
@@ -156,9 +210,10 @@ public class EnemySpawner : MonoBehaviour
     {
         updateTxt = "Wave: " + (waveNumber + 1);
         waveTxt.text = updateTxt;
+        allUpdateTxt.text = "";
     }
 
-    private IEnumerator Shake(GameObject obj)
+    public IEnumerator Shake(GameObject obj)
     {
         Vector3 initialPosition = obj.transform.position;
         elapsed = 0.0f;
@@ -176,6 +231,20 @@ public class EnemySpawner : MonoBehaviour
 
         obj.transform.position = initialPosition;
 
+    }
+
+    private IEnumerator WaitForCashIn()
+    {
+        yield return new WaitForSeconds(1);
+        
+    }
+
+
+    private IEnumerator FinalBoss()
+    {
+
+
+        yield return null;
     }
 
 }

@@ -16,21 +16,6 @@ public class MoneyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*  if(tp.selectedPrefab != null)
-          {
-              if(flag == true)
-              {
-                  Turret t = tp.selectedPrefab.GetComponent<Turret>();
-                  money = money - t.cost;
-                  UpdateMoneyText();
-                  flag = false;
-              }
-
-          }
-          else
-          {
-             // flag = true;
-          }*/
         UpdateMoneyText();
     }
 

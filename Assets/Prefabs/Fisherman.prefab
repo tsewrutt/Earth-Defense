@@ -299,9 +299,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -1024549476297492835, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
+      propertyPath: maxhealth
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_Name
-      value: e1 Variant 3
+      value: Fisherman
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739306, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: m_TagString
@@ -385,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2971005089939739309, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
       propertyPath: speed
-      value: 2
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -442,6 +446,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2582768, y: 0.35955605}
   m_EdgeRadius: 0
+--- !u!95 &5774538398510309925
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223528155772508787}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b662b8538033bef4799d677b6a45c74c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &3223528155772508789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2971005089939739308, guid: 360964516cd882e4d860b1b559451e7d, type: 3}
