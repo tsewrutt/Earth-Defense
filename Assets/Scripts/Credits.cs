@@ -12,6 +12,8 @@ public class Credits : MonoBehaviour
     {
         obj = GameObject.FindWithTag("signal");
 
+        
+
         Gamesignal gs = obj.GetComponent<Gamesignal>();
     
         if(gs.win == true)

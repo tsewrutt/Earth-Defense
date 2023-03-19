@@ -46,7 +46,7 @@ public class TurretPlacement : MonoBehaviour
             {
                 //do nothing if we click inside of box region
                 Debug.Log("box hit");
-                  
+                em.allUpdateTxt.text = "Turret cannot be placed, try selecting a turret and placing a different location";
             }
             else
             {
@@ -65,6 +65,7 @@ public class TurretPlacement : MonoBehaviour
                     pI.transform.parent = tilemap.transform;
 
                     mm.money = mm.money - t.cost;
+                    em.allUpdateTxt.text = "";
                 }
                 else
                 {

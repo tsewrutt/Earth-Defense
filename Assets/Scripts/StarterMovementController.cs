@@ -11,10 +11,23 @@ public class StarterMovementController : MonoBehaviour
     public float speed = 10f;
     private Rigidbody2D rb;
     public float init_s = 50f;
-    public Vector3 direction; 
+    public Vector3 direction;
     // public Light point_l;
+    private GameObject obj;
     void Start()
     {
+        obj = GameObject.FindWithTag("signal");
+
+        if (obj != null)
+        {
+            Destroy(obj);
+            // The GameObject with the specified tag exists
+        }
+        else
+        {
+            //nothing happens
+            // The GameObject with the specified tag does not exist
+        }
 
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(direction * init_s * speed * Time.deltaTime);
