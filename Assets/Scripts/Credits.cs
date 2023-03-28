@@ -23,8 +23,9 @@ public class Credits : MonoBehaviour
            
             if(music != null)
             {
-                AudioSource a = music.GetComponent<AudioSource>();
-                a.Play();
+               /* AudioSource a = music.GetComponent<AudioSource>();
+                a.Play();*/
+               //nothing is done since the same music keeps playing
             }
 
             gameOverText.text = "Planet Earth has been saved!\n\nThank you for playing!!";
@@ -33,7 +34,7 @@ public class Credits : MonoBehaviour
         else
         {
             AudioSource a = music.GetComponent<AudioSource>();
-            a.Stop();
+            a.Pause();
             loseSound.Play();
             gameOverText.text = "You Failed!\nAll the animals and plants perished to death!\n\nTry again";
         }

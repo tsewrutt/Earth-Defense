@@ -13,6 +13,8 @@ public class StartAudio : MonoBehaviour
 
         if(objs.Length > 1)
         {
+            AudioSource a = objs[0].GetComponent<AudioSource>();
+            a.Play();
             Destroy(this.gameObject);
         }
 

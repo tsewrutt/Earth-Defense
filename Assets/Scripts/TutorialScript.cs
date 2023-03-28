@@ -82,7 +82,7 @@ public class TutorialScript : MonoBehaviour
         ToggleGOVisibility(updateallTxt_arrow, em.allUpdateTxt, false);
         ToggleGOVisibility(turret_arrow, turret_info_txt, false);
         ToggleGOVisibility(placement_arrow, here_txt, false);
-    
+        em.ghostTxt.text = "";
         tutorialComplete = true;
 
         //disable button
