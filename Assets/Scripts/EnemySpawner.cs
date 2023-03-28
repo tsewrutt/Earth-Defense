@@ -31,7 +31,10 @@ public class EnemySpawner : MonoBehaviour
     public MoneyManager mm;
     public Text timer_txt;
     public Text waveTxt;
-   
+
+    //sfx
+    public AudioSource a;
+    public AudioSource waveBeatenSound;
 
     private string updateTxt;
     private bool start = false;
@@ -78,7 +81,10 @@ public class EnemySpawner : MonoBehaviour
             {
                 yield return null;
             }
-            
+            // This is where wave is beaten
+            waveBeatenSound.Stop();
+            waveBeatenSound.Play();
+
             float startTimer = timeBetweenWaves;
             while (startTimer > 0)
             {
@@ -142,6 +148,7 @@ public class EnemySpawner : MonoBehaviour
 
             if (enemies.Length == 0)
             {
+
                 currentEnemies = 0;
             }
             //meaning we've reached the end of the game
@@ -156,7 +163,8 @@ public class EnemySpawner : MonoBehaviour
                 if (!moneyRewarded)
                 {
                     mm.money += 500;
-
+                    a.Stop();
+                    a.Play();
                     StartCoroutine(Shake(coin));
                     b2.interactable = true;
                     StartCoroutine(WaitForCashIn());
@@ -166,7 +174,9 @@ public class EnemySpawner : MonoBehaviour
             case 2:
                 if (!moneyRewarded)
                 {
-                    mm.money += 1500;
+                    mm.money += 1000;
+                    a.Stop();
+                    a.Play();
                     StartCoroutine(Shake(coin));
                     StartCoroutine(Shake(coin));
                     b3.interactable = true;
@@ -178,7 +188,9 @@ public class EnemySpawner : MonoBehaviour
             case 3:
                 if (!moneyRewarded)
                 {
-                    mm.money += 1000;
+                    a.Stop();
+                    a.Play();
+                    mm.money += 800;
                     StartCoroutine(Shake(coin));
                     StartCoroutine(WaitForCashIn());
                     moneyRewarded = true;

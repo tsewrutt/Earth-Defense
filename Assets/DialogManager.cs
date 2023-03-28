@@ -28,6 +28,11 @@ public class DialogManager : MonoBehaviour
     private int index = 0;
     List<string> dialog_l = new List<string>();
 
+    public List <AudioSource> a = new List<AudioSource>();
+  
+
+
+
     //JESUS DIALOG
     string s1 = "The World Is on FIRE!!! The human activities are killing Planet Earth.";
     string s2 = "You need to save them.";
@@ -56,7 +61,10 @@ public class DialogManager : MonoBehaviour
         dialog_l.Add(s21);
         dialog_l.Add(s3);
         dialog_l.Add(s31);
+
+
         StartCoroutine(Convo(index));
+
     }
 
     // Update is called once per frame
@@ -105,6 +113,30 @@ public class DialogManager : MonoBehaviour
         Debug.Log("movement complete");
         while (i < dialog_l.Count)
         {
+            switch (i)
+            {
+                case 0:
+                    a[i].Play();
+                    break;
+                case 1:
+                    a[i].Play();
+                    break;
+                case 2:
+                    a[i].Play();
+                    break;
+                case 3:
+                    a[i].Play();
+                    break;
+                case 4:
+                    a[i].Play();
+                    break;
+                case 5:
+                    a[i].Play();
+                    break;
+                default:
+                    break;
+            }
+
             if (i % 2 == 0)
             {
                 // yield return new WaitForSeconds(1f);
@@ -118,8 +150,9 @@ public class DialogManager : MonoBehaviour
                 StartCoroutine(ShakeSprite(angel));
                 yield return StartCoroutine(ShowTextAndWait(i, dialog_l[i], 5.0f));
             }
+            
 
-           
+
             Debug.Log("changing convo...");
             i++;
 
@@ -178,7 +211,7 @@ public class DialogManager : MonoBehaviour
 
     private IEnumerator UpdateScene()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene("level1");
     }
 

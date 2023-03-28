@@ -10,6 +10,7 @@ TagManager:
   - Ground
   - collider
   - signal
+  - StarterMusic
   layers:
   - Default
   - TransparentFX

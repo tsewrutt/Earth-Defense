@@ -14,6 +14,8 @@ public class StarterMovementController : MonoBehaviour
     public Vector3 direction;
     // public Light point_l;
     private GameObject obj;
+
+
     void Start()
     {
         obj = GameObject.FindWithTag("signal");

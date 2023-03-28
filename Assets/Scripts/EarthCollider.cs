@@ -15,6 +15,10 @@ public class EarthCollider : MonoBehaviour
     private string updateTxt;
     // Start is called before the first frame update
 
+    //sfx
+    public AudioSource a;
+
+
     //GRAB STUFF FROM ES AND MANIPULATE IT
     public EnemySpawner em;
     public GameObject heart;
@@ -30,7 +34,8 @@ public class EarthCollider : MonoBehaviour
         {
             health = health - enemydamage;
             StartCoroutine(em.Shake(heart));
-
+            a.Stop();
+            a.Play();
             UpdateText();
             if(health == 0)
             {

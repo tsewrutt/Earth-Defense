@@ -9,7 +9,7 @@ public class TurretProjectile : MonoBehaviour
     [SerializeField] protected int damage = 10;
     public GameObject bprefab;
     // Start is called before the first frame update
-    
+    public AudioSource a;
     public int Damage { get; set; }
     
     public float DelayPerShot { get; set; }
@@ -36,6 +36,10 @@ public class TurretProjectile : MonoBehaviour
                 GameObject bullet = Instantiate(bprefab, projectileSpawnPos.position, Quaternion.identity);
                 bullet.GetComponent<Rigidbody2D>().velocity = direction * 2;
                 Bullet bulletComponent = bullet.GetComponent<Bullet>();
+                //sfx
+                a.Stop();
+                a.Play();
+                //sfx
                 bulletComponent.Damage = Damage;
                 bulletComponent.SetEnemy(_turret.target);
                 Destroy(bullet, 3.0f);
