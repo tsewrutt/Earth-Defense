@@ -40,7 +40,8 @@ public class EnemySpawner : MonoBehaviour
     private bool start = false;
     private bool moneyRewarded = false;
 
-    //HEALTH
+    //IN GAME END TEXT
+    public Text endtxt;
 
     //COIN
     public float shakeMagnitude = 1f;
@@ -50,6 +51,9 @@ public class EnemySpawner : MonoBehaviour
 
     //Wining Object
     public Gamesignal signal;
+
+    //Coroutine
+    public Coroutine co = null;
 
     void Start()
     {
@@ -94,11 +98,11 @@ public class EnemySpawner : MonoBehaviour
                 {
                     case 0:
                        // StartCoroutine(Shake(coin));
-                        allUpdateTxt.text = "New Turret Unlocked!";
+                        allUpdateTxt.text = "New Turret Unlocking...";
                         break;
                     case 1:
                         //StartCoroutine(Shake(coin));
-                        allUpdateTxt.text = "New Turret Unlocked!";
+                        allUpdateTxt.text = "New Turret Unlocking...";
                         break;
                     case 2:
                         
@@ -137,8 +141,8 @@ public class EnemySpawner : MonoBehaviour
             
             start = true;
             UpdateText(); // this writes the wave number now
-           
-            StartCoroutine(Spawn());
+
+            co = StartCoroutine(Spawn());
         }
         ts.tutorialComplete = false;
         //check for amount of enemies left
@@ -213,10 +217,19 @@ public class EnemySpawner : MonoBehaviour
 
             //THIS IS FOR WINNING!!!
             signal.win = true;
-            SceneManager.LoadScene("endscene");
+            endtxt.text = "Planet Earth has been saved!\nYou Win!!\nPress any key to go back to main menu";
+            // SceneManager.LoadScene("endscene");
+            if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
+            {
+                SceneManager.LoadScene("startscene");
+
+            }
+
+           
         }
 
     }
+
 
     private void UpdateText()
     {

@@ -5,26 +5,24 @@ using UnityEngine.UI;
 public class Credits : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text gameOverText;
-    private GameObject obj;
     //sfx
     //public AudioSource winSound;
-    public AudioSource loseSound;
+    //public AudioSource loseSound;
     void Start()
     {
-        obj = GameObject.FindWithTag("signal");
-        GameObject music = GameObject.FindGameObjectWithTag("StarterMusic");
+     //   obj = GameObject.FindWithTag("signal");
+    //    GameObject music = GameObject.FindGameObjectWithTag("StarterMusic");
 
 
-        Gamesignal gs = obj.GetComponent<Gamesignal>();
+    /*    Gamesignal gs = obj.GetComponent<Gamesignal>();
     
         if(gs.win == true)
         {
            
             if(music != null)
             {
-               /* AudioSource a = music.GetComponent<AudioSource>();
-                a.Play();*/
+               *//* AudioSource a = music.GetComponent<AudioSource>();
+                a.Play();*//*
                //nothing is done since the same music keeps playing
             }
 
@@ -36,8 +34,9 @@ public class Credits : MonoBehaviour
             AudioSource a = music.GetComponent<AudioSource>();
             a.Pause();
             loseSound.Play();
-            gameOverText.text = "You Failed!\nAll the animals and plants perished to death!\n\nTry again";
-        }
+            gameOverText.text = "You Failed!\nAll the animals and plants perished!\nTry again";
+        }*/
+
     
     }
 

@@ -1,0 +1,17 @@
+http://pixelartmaker.com/art/6f89fa7c8e6987f -> angel
+http://pixelartmaker.com/art/8f5de79b4917ab6 -> jesus
+https://opengameart.org/content/pixel-flower-icons -> flowers
+https://opengameart.org/content/flame-creature -> flame
+https://opengameart.org/content/fishing-game-assets-pixel-art -> fisherman
+https://www.shutterstock.com/image-vector/voxel-heart-rotation-animation-sequence-sprite-481045324 -> heart
+https://opengameart.org/content/flashing-arrow-animation -> arrow
+
+
+Sound Stuff
+https://www.myinstants.com/en/instant/wave-defeated-42484/
+https://mixkit.co/free-sound-effects/gun/
+https://www.myinstants.com/en/instant/cash-point-19047/
+https://www.myinstants.com/en/instant/minecraft-hurt-sound-65926/
+https://www.myinstants.com/en/instant/for-the-damaged-instant-96299/
+
+maybe this for turrets https://github.com/kidscancode/topdown_tanks/blob/master/assets/onlyObjects_retina_rotated.png

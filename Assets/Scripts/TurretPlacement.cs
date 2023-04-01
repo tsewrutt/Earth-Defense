@@ -13,7 +13,8 @@ public class TurretPlacement : MonoBehaviour
     private Rect rect;
     //money part is working for turret placement but reward is not rn
     //only issue is money manager x enemy
-    public Vector3Int prefabSize = new Vector3Int(2, 2, 0);
+    // public Vector3Int prefabSize = new Vector3Int(1, 1, 0);
+    public Vector3 prefabSize = new Vector3(1, 1, 0);
     //dont even need this since we have only one prefab per button click
     //UPDATING TEXT SCRIPT
     public EnemySpawner em;

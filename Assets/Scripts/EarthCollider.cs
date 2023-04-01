@@ -11,6 +11,7 @@ public class EarthCollider : MonoBehaviour
    // public TurretPlacement tp;
     public int enemydamage;
     public Text txt;
+    private bool killEnemybool;
    // public Text moneyTxt;
     private string updateTxt;
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class EarthCollider : MonoBehaviour
     public GameObject heart;
     void Start()
     {
+        killEnemybool = false;
         UpdateText();
     }
 
@@ -39,7 +41,10 @@ public class EarthCollider : MonoBehaviour
             UpdateText();
             if(health == 0)
             {
-                SceneManager.LoadScene("endscene");
+                StopAllCoroutines();
+                em.endtxt.text = "Animals and Plants perished! You Lose!!\nPress any key to go back to main menu";
+
+                //Now can press anything to move scene
             }
         }
     }
@@ -54,13 +59,28 @@ public class EarthCollider : MonoBehaviour
 
     private void Update()
     {
-        /*if(tp != null)
+        if(health <= 0)
         {
-            Turret t = tp.selectedPrefab.GetComponent<Turret>();
-            //placed
-            money = money - t.cost;
-            UpdateText();
+            
+            if (Input.anyKeyDown || Input.GetMouseButtonDown(0))
+            {
+                SceneManager.LoadScene("startscene");
+
+            }
+            if (!killEnemybool)
+            {
+                //stops spawing any more enemies then destroy all the current one's
+                StopCoroutine(em.co);
+                GameObject[] objs = GameObject.FindGameObjectsWithTag("enemy");
+                foreach (GameObject go in objs)
+                {
+                    GameObject.Destroy(go);
+                }
+                killEnemybool = true;
+            }
+           
+
         }
-*/
+
     }
 }

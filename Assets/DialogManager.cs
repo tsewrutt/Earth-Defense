@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -41,20 +42,38 @@ public class DialogManager : MonoBehaviour
     //ANGEL DIALOG
     string s11 = "Those shitty humans, they get what they deserve. pfff, They are destroying their own place.";
     string s21 = "No, why should I??? It was their own doing!";
-    string s31 = "Fine! I'll go save them only this once!";
+    string s31 = "Jesus Christ! Let me think about it!";
 
     //TEXT BOXES
     public Text characterName;
     public Text characterDialog;
-    public SkipBtnBehaviour skipbtnbehaviour;
     public CoroutineMove cmovement;
 
+    //CHOICE BUTTONS
+    public Button b1;
+    public Button b2;
 
+    private bool buttonPressed = false;
+    public GameObject b1go;
+    public GameObject b2go;
+
+    //SKIP BUTTON
+    public Button skip;
+    public GameObject skipgo;
+    private Coroutine co;
     void Start()
     {
         initAngelPos = angel.transform.position;
         initJesusPos = jesus.transform.position;
-        
+
+        b1.onClick.AddListener(YeswithoutYield);
+        b2.onClick.AddListener(NowithoutYield);
+        skip.onClick.AddListener(SkipDialog);
+
+        b1go.SetActive(false);
+        b2go.SetActive(false);
+        skipgo.SetActive(false);
+
         dialog_l.Add(s1);
         dialog_l.Add(s11);
         dialog_l.Add(s2);
@@ -63,7 +82,7 @@ public class DialogManager : MonoBehaviour
         dialog_l.Add(s31);
 
 
-        StartCoroutine(Convo(index));
+        co = StartCoroutine(Convo(index));
 
     }
 
@@ -110,7 +129,9 @@ public class DialogManager : MonoBehaviour
         StartCoroutine(MoveGameObject(jesus, targetPosForJesus));
         StartCoroutine(MoveGameObject(angel, targetPosForAngel));
         yield return StartCoroutine(cmovement.MoveCoroutine());
-        Debug.Log("movement complete");
+        //Now we can show skip
+        skipgo.SetActive(true);
+
         while (i < dialog_l.Count)
         {
             switch (i)
@@ -158,20 +179,86 @@ public class DialogManager : MonoBehaviour
 
             if (i >= dialog_l.Count)
             {
-                UpdateDialogBox("", "");
-                StartCoroutine(cmovement.MoveBackCoroutine());
-                yield return StartCoroutine(MoveGameObject(jesus, initJesusPos));
-                yield return StartCoroutine(MoveGameObject(angel, initAngelPos));
-               
-                StartCoroutine(UpdateScene());
-                //insert here
-               
+
+                //NOW WE LET PLAY TO CHOOSE WHETHER THEY ACCEPT OR THEY DON'T
+
+                UpdateDialogBox("", "Do you want to help the living things from Earth?");
+                b1go.SetActive(true);
+                b2go.SetActive(true);
+
+
             }
         }
 
 
 
     }
+
+
+
+    private IEnumerator WaitForButtonCoroutine()
+    {
+        // Keep waiting until one of the buttons is pressed
+        while (!buttonPressed)
+        {
+            yield return null;
+        }
+
+        // Button has been pressed, do something
+        Debug.Log("Button pressed!");
+    }
+
+
+
+    private void YeswithoutYield()
+    {
+        buttonPressed = true;
+        b1go.SetActive(false);
+        b2go.SetActive(false);
+        StartCoroutine(YesFunc());
+    }
+    private IEnumerator YesFunc()
+    {
+        UpdateDialogBox("", "");
+        StartCoroutine(cmovement.MoveBackCoroutine());
+        yield return StartCoroutine(MoveGameObject(jesus, initJesusPos));
+        yield return StartCoroutine(MoveGameObject(angel, initAngelPos));
+
+        StartCoroutine(UpdateScene());
+    }
+
+
+    private void NowithoutYield()
+    {
+        buttonPressed = true;
+        b1go.SetActive(false);
+        b2go.SetActive(false);
+        StartCoroutine(NoFunc());
+    }
+    private IEnumerator NoFunc()
+    {
+        UpdateDialogBox("", "Earth was destroyed!");
+        yield return new WaitForSeconds(2.0f);
+
+        StartCoroutine(cmovement.MoveBackCoroutine());
+        yield return StartCoroutine(MoveGameObject(jesus, initJesusPos));
+        yield return StartCoroutine(MoveGameObject(angel, initAngelPos));
+
+        BadEnding();
+
+    }
+
+    private void SkipDialog()
+    {
+        StopCoroutine(co);
+        UpdateDialogBox("", "Do you want to help the living things from Earth?");
+        b1go.SetActive(true);
+        b2go.SetActive(true);
+
+
+    }
+
+
     private void UpdateDialogBox(string character, string dialog)
     {
         characterName.text = character;
@@ -213,6 +300,12 @@ public class DialogManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         SceneManager.LoadScene("level1");
+    }
+
+    private void BadEnding()
+    {
+        //yield return new WaitForSeconds(2.0f);
+        Application.Quit();
     }
 
 
